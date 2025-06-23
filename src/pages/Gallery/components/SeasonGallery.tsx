@@ -1,26 +1,17 @@
 import { useState } from "react";
 
-// Базовый путь — для корректной работы на GitHub Pages
+// Базовый путь для GitHub Pages
 const base = import.meta.env.BASE_URL;
 
-// Фото по категориям
-const winterImages = [
-  `${base}photos/winter/1.jpg`,
-  `${base}photos/winter/2.jpg`,
-  `${base}photos/winter/3.jpg`,
-];
+// Массив путей к файлам
+const generateImages = (folder: string, count: number) =>
+  Array.from({ length: count }, (_, i) => `${base}photos/${folder}/${i + 1}.jpg`);
 
-const summerImages = [
-  `${base}photos/summer/1.jpg`,
-  `${base}photos/summer/2.jpg`,
-  `${base}photos/summer/3.jpg`,
-];
-
-const indoorImages = [
-  `${base}photos/indoor/1.jpg`,
-  `${base}photos/indoor/2.jpg`,
-  `${base}photos/indoor/3.jpg`,
-];
+const categories = {
+  winter: generateImages("winter", 5),
+  summer: generateImages("summer", 4),
+  indoor: generateImages("indoor", 11),
+};
 
 // Шрифт в стиле "Great Vibes"
 const fancyFont = { fontFamily: "'Great Vibes', cursive" };
@@ -29,7 +20,7 @@ const fancyFont = { fontFamily: "'Great Vibes', cursive" };
 const tabBaseClass =
   "px-4 sm:px-6 py-2 text-2xl sm:text-3xl font-semibold border-b-2 transition-colors";
 
-// Генератор класса для активной/неактивной кнопки
+// Генератор класса для кнопки
 const getTabClass = (
   active: boolean,
   color: "blue" | "green" | "rose"
@@ -41,12 +32,7 @@ const getTabClass = (
 export default function SeasonGallery() {
   const [tab, setTab] = useState<"winter" | "summer" | "indoor">("winter");
 
-  const images =
-    tab === "winter"
-      ? winterImages
-      : tab === "summer"
-      ? summerImages
-      : indoorImages;
+  const images = categories[tab];
 
   return (
     <div>
@@ -59,7 +45,6 @@ export default function SeasonGallery() {
         >
           Зимой ❄
         </button>
-
         <button
           onClick={() => setTab("summer")}
           className={getTabClass(tab === "summer", "green")}
@@ -67,7 +52,6 @@ export default function SeasonGallery() {
         >
           Летом 🌿
         </button>
-
         <button
           onClick={() => setTab("indoor")}
           className={getTabClass(tab === "indoor", "rose")}
