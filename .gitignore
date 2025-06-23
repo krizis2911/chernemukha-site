@@ -1,0 +1,43 @@
+# ⚙️ Node.js
+node_modules/
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# 🏗 Сборка
+dist/
+dist-ssr/
+*.tsbuildinfo
+
+# 🔐 Переменные окружения
+.env
+.env.*
+
+# 📝 Логи
+logs/
+*.log
+
+# 🧵 Tailwind / PostCSS (если кешируются)
+.pnpm-debug.log*
+.postcss-cache/
+
+# 💻 IDE и редакторы
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# 🍏 Mac
+.DS_Store
+
+# 🛠 Swap-файлы и временные
+*.sw?
+*.local
+
+# 📸 Кеш изображений (если используешь image-оптимизаторы)
+.cache/

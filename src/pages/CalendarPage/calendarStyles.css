@@ -1,0 +1,5 @@
+.booked {
+  background: #bfdbfe !important;   /* Tailwind-эквивалент bg-blue-200 */
+  color: #000 !important;
+  border-radius: 6px !important;
+}
