@@ -1,4 +1,5 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+
 import { Header } from './assets/components/Header';
 import { HomePage } from './pages/Home/HomePage';
 import { AboutSection } from './pages/AboutSection/AboutSection';
@@ -10,16 +11,14 @@ import CalendarPage from './pages/CalendarPage/CalendarPage';
 export const App = () => {
   return (
     <Router>
-      <Header /> {/* 🔹 будет отображаться всегда */}
+      <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutSection />} />
         <Route path="/gallery" element={<GalleryPage />} />
         <Route path="/prices" element={<PricesPage />} />
         <Route path="/contacts" element={<ContactsPage />} />
-         <Route path="/calendar" element={<CalendarPage />} />
-
-      
+        <Route path="/calendar" element={<CalendarPage />} />
       </Routes>
     </Router>
   );

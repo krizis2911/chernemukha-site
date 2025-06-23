@@ -74,14 +74,14 @@ export default function CalendarPage() {
 
         <div className="flex sm:flex-row flex-col justify-center items-center gap-4">
           <button
-            onClick={() => window.open('https://wa.me/79999999999', '_blank')}
+            onClick={() => window.open('https://wa.me/79050487219', '_blank')}
             className="bg-green-500 hover:bg-green-600 px-6 py-3 rounded-xl w-full sm:w-auto font-semibold text-white transition"
           >
             Написать в WhatsApp
           </button>
 
           <a
-            href="tel:+79999999999"
+            href="tel:+79050487219"
             className="bg-blue-500 hover:bg-blue-600 px-6 py-3 rounded-xl w-full sm:w-auto font-semibold text-white text-center transition"
           >
             Позвонить нам

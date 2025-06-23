@@ -1,22 +1,25 @@
 import { useState } from "react";
 
+// Базовый путь — для корректной работы на GitHub Pages
+const base = import.meta.env.BASE_URL;
+
 // Фото по категориям
 const winterImages = [
-  "/photos/winter/1.jpg",
-  "/photos/winter/2.jpg",
-  "/photos/winter/3.jpg",
+  `${base}photos/winter/1.jpg`,
+  `${base}photos/winter/2.jpg`,
+  `${base}photos/winter/3.jpg`,
 ];
 
 const summerImages = [
-  "/photos/summer/1.jpg",
-  "/photos/summer/2.jpg",
-  "/photos/summer/3.jpg",
+  `${base}photos/summer/1.jpg`,
+  `${base}photos/summer/2.jpg`,
+  `${base}photos/summer/3.jpg`,
 ];
 
 const indoorImages = [
-  "/photos/indoor/1.jpg",
-  "/photos/indoor/2.jpg",
-  "/photos/indoor/3.jpg",
+  `${base}photos/indoor/1.jpg`,
+  `${base}photos/indoor/2.jpg`,
+  `${base}photos/indoor/3.jpg`,
 ];
 
 // Шрифт в стиле "Great Vibes"

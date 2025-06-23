@@ -1,11 +1,15 @@
 import { Link } from 'react-router-dom';
 
-const links = [
-  { to: '/', label: 'Главная' },
-  { to: '/about', label: 'О нас' },
-  { to: '/gallery', label: 'Фотографии' },
-  { to: '/prices', label: 'Цены' },
-  { to: '/contacts', label: 'Контакты' },
+type NavLink =
+  | { to: string; label: string; external?: false }
+  | { href: string; label: string; external: true };
+
+const links: NavLink[] = [
+  { to: '/',         label: 'Главная'     },
+  { to: '/about',    label: 'О нас'       },
+  { to: '/gallery',  label: 'Фотографии'  },
+  { to: '/prices',   label: 'Цены'        },
+  { to: '/contacts', label: 'Контакты'    },
   {
     href: 'https://wa.me/79050487219',
     label: 'Забронировать',
@@ -22,29 +26,27 @@ const linkClass = `
   hover:after:w-full
 `;
 
-export const NavMenu = () => {
-  return (
-    <nav
-      className="hidden md:flex flex-shrink-0 gap-10 min-w-0 text-3xl whitespace-nowrap"
-      style={{ fontFamily: "'Great Vibes', cursive" }}
-    >
-      {links.map((item, index) =>
-        item.external ? (
-          <a
-            key={index}
-            href={item.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={linkClass}
-          >
-            {item.label}
-          </a>
-        ) : (
-          <Link key={index} to={item.to} className={linkClass}>
-            {item.label}
-          </Link>
-        )
-      )}
-    </nav>
-  );
-};
+export const NavMenu = () => (
+  <nav
+    className="hidden md:flex flex-shrink-0 gap-10 min-w-0 text-3xl whitespace-nowrap"
+    style={{ fontFamily: "'Great Vibes', cursive" }}
+  >
+    {links.map((item) =>
+      item.external ? (
+        <a
+          key={item.label}
+          href={item.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={linkClass}
+        >
+          {item.label}
+        </a>
+      ) : (
+        <Link key={item.to} to={item.to} className={linkClass}>
+          {item.label}
+        </Link>
+      )
+    )}
+  </nav>
+);

@@ -1,12 +1,14 @@
 import { Link } from 'react-router-dom';
 
 export const HomePage = () => {
+  const base = import.meta.env.BASE_URL;
+
   return (
     <>
       {/* Hero-секция */}
       <section
         className="relative flex justify-center items-center bg-cover bg-center w-full h-[90vh] text-white"
-        style={{ backgroundImage: 'url("/camin.jpg")' }}
+        style={{ backgroundImage: `url("${base}camin.jpg")` }}
       >
         {/* затемнение */}
         <div className="absolute inset-0 bg-black/50"></div>
@@ -30,6 +32,7 @@ export const HomePage = () => {
           </Link>
         </div>
       </section>
+
       <section className="bg-[#fdf6ec] px-6 py-20 text-gray-800 text-center">
         <h2 className="mb-8 font-bold text-4xl md:text-5xl">
           Настоящий отдых с душой
@@ -50,9 +53,7 @@ export const HomePage = () => {
             <p>Интерьер из натурального дерева, мягкий свет и тишина</p>
           </div>
           <div>
-            <h3 className="mb-2 font-semibold text-2xl">
-              🧖‍♀️ Простор и комфорт
-            </h3>
+            <h3 className="mb-2 font-semibold text-2xl">🧖‍♀️ Простор и комфорт</h3>
             <p>Чистая парная, душ, зона отдыха и чайная комната</p>
           </div>
         </div>

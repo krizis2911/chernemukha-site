@@ -4,5 +4,11 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: '/chernemukha-site/',
   plugins: [tailwindcss(), react()],
+  build: {
+    rollupOptions: {
+      input: 'index.html',
+    },
+  },
 });

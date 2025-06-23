@@ -1,6 +1,7 @@
 import { useState } from "react";
 
-const images = Array.from({ length: 10 }, (_, i) => `/reviews/${i + 1}.png`);
+const base = import.meta.env.BASE_URL;
+const images = Array.from({ length: 10 }, (_, i) => `${base}reviews/${i + 1}.png`);
 
 export default function AvitoReviewGallery() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -14,7 +15,7 @@ export default function AvitoReviewGallery() {
   };
 
   return (
-    <div className="relative mx-auto py-8 w-full max-w-4xl">
+    <div className="mx-auto py-8 w-full max-w-4xl">
       <div className="relative bg-white shadow rounded-xl overflow-hidden">
         <img
           src={images[currentIndex]}
@@ -23,19 +24,21 @@ export default function AvitoReviewGallery() {
         />
       </div>
 
-      {/* Кнопки ← и → */}
-      <button
-        onClick={showPrev}
-        className="top-1/2 left-2 z-10 absolute bg-white hover:bg-gray-100 shadow px-3 py-1 rounded-full text-xl -translate-y-1/2"
-      >
-        ←
-      </button>
-      <button
-        onClick={showNext}
-        className="top-1/2 right-2 z-10 absolute bg-white hover:bg-gray-100 shadow px-3 py-1 rounded-full text-xl -translate-y-1/2"
-      >
-        →
-      </button>
+      {/* 🔻 Стрелки — адаптивно: горизонтально на desktop, вертикально на mobile */}
+      <div className="sm:top-1/2 sm:right-0 sm:left-0 sm:absolute flex justify-between mt-4 sm:mt-0 sm:px-4 sm:-translate-y-1/2">
+        <button
+          onClick={showPrev}
+          className="bg-white hover:bg-gray-100 shadow px-4 py-2 rounded-full text-xl"
+        >
+          ←
+        </button>
+        <button
+          onClick={showNext}
+          className="bg-white hover:bg-gray-100 shadow px-4 py-2 rounded-full text-xl"
+        >
+          →
+        </button>
+      </div>
     </div>
   );
 }

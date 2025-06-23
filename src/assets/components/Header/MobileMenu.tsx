@@ -1,24 +1,26 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+type NavItem = { to: string; label: string };
+
+const links: NavItem[] = [
+  { to: '/',         label: 'Главная'      },
+  { to: '/about',    label: 'О нас'        },
+  { to: '/gallery',  label: 'Фотографии'   },
+  { to: '/prices',   label: 'Цены'         },
+  { to: '/contacts', label: 'Контакты'     }, // отдельная страница «Контакты»
+];
+
 export const MobileMenu = () => {
   const [open, setOpen] = useState(false);
 
-  const links = [
-    { to: '/', label: 'Главная' },
-    { to: '/about', label: 'О нас' },
-    { to: '/gallery', label: 'Фотографии' },
-    { to: '/prices', label: 'Цены' },
-    { to: '/#contacts', label: 'Контакты' },
-  ];
-
   return (
     <div className="md:hidden relative">
-      {/* Кнопка меню */}
+      {/* Кнопка-гамбургер */}
       <button
         onClick={() => setOpen(!open)}
-        className="focus:outline-none text-gray-800 text-4xl"
         aria-label="Открыть меню"
+        className="focus:outline-none text-gray-800 text-4xl"
       >
         ☰
       </button>
@@ -29,20 +31,21 @@ export const MobileMenu = () => {
             className="flex flex-col gap-4 px-4 py-6 text-gray-800 text-2xl"
             style={{ fontFamily: "'Great Vibes', cursive" }}
           >
-            {links.map((item, index) => (
-              <li key={index}>
+            {links.map(({ to, label }) => (
+              <li key={to}>
                 <Link
-                  to={item.to}
+                  to={to}
                   onClick={() => setOpen(false)}
                   className="inline-block after:-bottom-[1px] after:left-0 after:absolute relative after:bg-current after:w-0 hover:after:w-full after:h-[2px] after:transition-all after:duration-300"
                 >
-                  {item.label}
+                  {label}
                 </Link>
               </li>
             ))}
+
             <li>
               <a
-                href="https://wa.me/79999999999"
+                href="https://wa.me/79050487219"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setOpen(false)}
