@@ -6,20 +6,27 @@ import { useState, useEffect } from 'react';
 type ValuePiece = Date | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];
 
-const dateKey = (d: Date) =>
-  `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(
-    d.getDate()
-  ).padStart(2, '0')}`;
+/* ---------- формируем ключ строго YYYY-MM-DD, локально ---------- */
+const dateKey = (d: Date) => d.toLocaleDateString('sv-SE'); // «2025-07-05»
 
 export default function CalendarPage() {
   const [value, setValue] = useState<Value>(new Date());
   const [booked, setBooked] = useState<Set<string>>(new Set());
 
   useEffect(() => {
-    fetch('/booked.json')
-      .then((r) => r.json())
-      .then((arr: string[]) => setBooked(new Set(arr)))
-      .catch((e) => console.error('Ошибка загрузки booked.json:', e));
+    /* путь работает и локально, и после деплоя */
+    const bookedUrl = `${import.meta.env.BASE_URL}booked.json`;
+
+    (async () => {
+      try {
+        const res = await fetch(bookedUrl);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const arr: string[] = await res.json();
+        setBooked(new Set(arr));
+      } catch (e) {
+        console.error('Ошибка загрузки booked.json:', e);
+      }
+    })();
   }, []);
 
   const isBooked = (d: Date) => booked.has(dateKey(d));
@@ -43,19 +50,18 @@ export default function CalendarPage() {
         📅 Выберите день и нажмите на кнопку ниже, чтобы связаться с нами.
       </p>
 
-{/* календарь строго по центру на любом экране */}
-<div className="flex justify-center my-6">
-  <Calendar
-    defaultView="month"
-    minDetail="month"
-    onChange={setValue}
-    value={value}
-    tileClassName={({ date, view }) =>
-      view === 'month' && isBooked(date) ? 'booked' : undefined
-    }
-  />
-</div>
-
+      {/* календарь строго по центру на любом экране */}
+      <div className="flex justify-center my-6">
+        <Calendar
+          defaultView="month"
+          minDetail="month"
+          onChange={setValue}
+          value={value}
+          tileClassName={({ date, view }) =>
+            view === 'month' && isBooked(date) ? 'booked' : undefined
+          }
+        />
+      </div>
 
       {/* Легенда */}
       <div className="flex justify-center mt-4 mb-8 text-sm">
